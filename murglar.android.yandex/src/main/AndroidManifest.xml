@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.badmanners.murglar.plugin.yandex">
+
+    <application>
+        <activity android:name="com.badmanners.murglar.plugin.LinkRedirectActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <data android:host="*music.yandex.ru" />
+                <data android:host="*music.yandex.by" />
+                <data android:host="*music.yandex.ua" />
+                <data android:host="*music.yandex.kz" />
+                <data android:host="*music.yandex.com" />
+                <data android:pathPattern="/users/.*/playlists/.*" />
+                <data android:pathPrefix="/artist/" />
+                <data android:pathPrefix="/album/" />
+                <data android:pathPrefix="/track/" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
