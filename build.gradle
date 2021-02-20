@@ -1,0 +1,136 @@
+import com.badmanners.build.Plugin
+
+allprojects {
+
+    ext.config = [:]
+    config.minSdk = 21
+    config.sdk = 30
+    config.buildTools = '30.0.3'
+
+    ext.versions = [:]
+    versions.murglar = '0.51'
+
+    ext.libs = [:]
+    libs.murglar_core = "com.badmanners:murglar.lib.core:$versions.murglar"
+    libs.android_build_tools = "com.android.tools.build:gradle:4.1.2"
+    libs.junit = "junit:junit:4.13.2"
+    libs.test_runner = "androidx.test:runner:1.3.0"
+
+
+    buildscript {
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+        }
+        dependencies {
+            classpath libs.android_build_tools
+        }
+    }
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven {
+            url localProperties().myMavenRepoReadUrl
+        }
+        mavenLocal()
+    }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+}
+
+def configureModule(Project project, Plugin plugin) {
+    configure(project, {
+
+        println "Configure android plugin module: $project"
+
+        apply plugin: 'com.android.application'
+
+        android {
+            compileSdkVersion config.sdk
+            buildToolsVersion config.buildTools
+
+            defaultConfig {
+                applicationId 'com.badmanners.murglar.plugin.' + plugin.id
+
+                versionCode plugin.version
+                versionName "$plugin.libVersion.$plugin.version"
+
+                minSdkVersion config.minSdk
+                targetSdkVersion config.sdk
+
+                manifestPlaceholders = [
+                        pluginId          : plugin.id,
+                        pluginName        : plugin.name,
+                        pluginFullName    : "Murglar plugin for $plugin.name",
+                        pluginMurglarClass: plugin.murglarClass,
+                        pluginVersion     : plugin.version,
+                        pluginLibVersion  : plugin.libVersion
+                ]
+
+                testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            }
+
+            signingConfigs {
+                signingConfig {
+                    def signingProps = localProperties()
+                    keyAlias signingProps.keyAlias
+                    keyPassword signingProps.keyPassword
+                    storeFile rootProject.file(signingProps.storeFile)
+                    storePassword signingProps.storePassword
+                }
+            }
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "murglar_plugin_${plugin.id}_${variant.versionName}.apk"
+                }
+            }
+
+            buildTypes {
+                debug {
+                    signingConfig signingConfigs.signingConfig
+                }
+                release {
+                    signingConfig signingConfigs.signingConfig
+                    minifyEnabled true
+                    proguardFiles getDefaultProguardFile('proguard-android.txt')
+                }
+            }
+
+            compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+        }
+
+        dependencies {
+            implementation this.project(':murglar.android.core')
+
+            compileOnly libs.murglar_core
+
+            testImplementation libs.junit
+            androidTestImplementation libs.test_runner
+        }
+
+        println "Configuration complete: $project"
+    })
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+Properties localProperties() {
+    def propertiesFile = rootProject.file("local.properties")
+    if (!propertiesFile.exists())
+        throw new GradleException("No local.properties found!")
+    def props = new Properties()
+    propertiesFile.withInputStream { props.load(it) }
+    return props
+}

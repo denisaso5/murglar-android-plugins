@@ -1,0 +1,17 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion config.sdk
+    buildToolsVersion config.buildTools
+
+    defaultConfig {
+        minSdkVersion config.minSdk
+        targetSdkVersion config.sdk
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}

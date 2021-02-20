@@ -1,0 +1,8 @@
+sdk.dir=C\:\\android-sdk
+
+myMavenRepoReadUrl=https://mymavenrepo.com/repo/******/
+
+keyAlias=release
+keyPassword=******
+storeFile=keystore.jks
+storePassword=******
