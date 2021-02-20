@@ -1,0 +1,13 @@
+import com.badmanners.build.Plugin
+
+configureModule(project, new Plugin(
+        id: "vkontakte",
+        name: "VK",
+        murglarClass: 'com.badmanners.murglar.lib.vkontakte.service.MurglarVk',
+        version: 1,
+        libVersion: 1
+))
+
+dependencies {
+    implementation "com.badmanners:murglar.lib.vkontakte:$versions.murglar"
+}
