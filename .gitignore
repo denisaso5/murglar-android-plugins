@@ -1,0 +1,34 @@
+# Android template
+bin/
+gen/
+out/
+release/
+
+# Gradle files
+.gradle/
+/build/
+/*/build/
+
+# Local configuration file (sdk path, etc) and keys
+local.properties
+keystore.jks
+
+# Log Files
+*.log
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+captures/
+
+# IntelliJ
+*.iml
+.idea
+
+# File-based project format
+*.iws
+*.ipr
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
