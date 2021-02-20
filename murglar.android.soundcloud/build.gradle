@@ -1,0 +1,13 @@
+import com.badmanners.build.Plugin
+
+configureModule(project, new Plugin(
+        id: "soundcloud",
+        name: "SoundCloud",
+        murglarClass: 'com.badmanners.murglar.lib.soundcloud.service.MurglarSC',
+        version: 1,
+        libVersion: 1
+))
+
+dependencies {
+    implementation "com.badmanners:murglar.lib.soundcloud:$versions.murglar"
+}

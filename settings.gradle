@@ -2,3 +2,4 @@ rootProject.name = 'murglar-android-plugins'
 
 include 'murglar.android.core'
 include 'murglar.android.deezer'
+include 'murglar.android.soundcloud'
