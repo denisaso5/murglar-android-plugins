@@ -1,7 +1,8 @@
 rootProject.name = 'murglar-android-plugins'
 
-include 'murglar.android.core'
-include 'murglar.android.deezer'
-include 'murglar.android.soundcloud'
-include 'murglar.android.vk'
-include 'murglar.android.yandex'
+include ':core'
+
+include ':deezer'
+include ':soundcloud'
+include ':vk'
+include ':yandex'

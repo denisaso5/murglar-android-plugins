@@ -1,0 +1,13 @@
+import com.badmanners.build.Plugin
+
+configurePluginModule(project, new Plugin(
+        id: "deezer",
+        name: "Deezer",
+        murglarClass: 'com.badmanners.murglar.lib.deezer.service.MurglarDzr',
+        version: 1,
+        libVersion: 1
+))
+
+dependencies {
+    implementation "com.badmanners:murglar.lib.deezer:$versions.murglar"
+}

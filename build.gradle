@@ -10,12 +10,13 @@ allprojects {
         ]
 
         versions = [
-                murglar: '0.61'
+                murglar: '0.61',
+                android_build_tools: '4.2.2'
         ]
 
         libs = [
                 murglar_core       : "com.badmanners:murglar.lib.core:$versions.murglar",
-                android_build_tools: "com.android.tools.build:gradle:4.2.1",
+                android_build_tools: "com.android.tools.build:gradle:$versions.android_build_tools",
                 junit              : "junit:junit:4.13.2",
                 test_runner        : "androidx.test:runner:1.3.0"
         ]
@@ -46,22 +47,24 @@ allprojects {
     }
 }
 
-def configureModule(Project project, Plugin plugin) {
+def configurePluginModule(Project project, Plugin plugin) {
     configure(project, {
 
         println "Configure android plugin module: $project"
 
         apply plugin: 'com.android.application'
 
+        def localProperties = localProperties()
+
         android {
             compileSdkVersion config.sdk
             buildToolsVersion config.buildTools
 
             defaultConfig {
-                applicationId 'com.badmanners.murglar.plugin.' + plugin.id
+                applicationId plugin.appId
 
                 versionCode plugin.version
-                versionName "$plugin.libVersion.$plugin.version"
+                versionName plugin.fullVersion
 
                 minSdkVersion config.minSdk
                 targetSdkVersion config.sdk
@@ -69,7 +72,7 @@ def configureModule(Project project, Plugin plugin) {
                 manifestPlaceholders = [
                         pluginId          : plugin.id,
                         pluginName        : plugin.name,
-                        pluginFullName    : "Murglar plugin for $plugin.name",
+                        pluginFullName    : plugin.fullName,
                         pluginMurglarClass: plugin.murglarClass,
                         pluginVersion     : plugin.version,
                         pluginLibVersion  : plugin.libVersion
@@ -80,11 +83,10 @@ def configureModule(Project project, Plugin plugin) {
 
             signingConfigs {
                 signingConfig {
-                    def signingProps = localProperties()
-                    keyAlias signingProps.keyAlias
-                    keyPassword signingProps.keyPassword
-                    storeFile rootProject.file(signingProps.storeFile)
-                    storePassword signingProps.storePassword
+                    keyAlias localProperties.keyAlias
+                    keyPassword localProperties.keyPassword
+                    storeFile rootProject.file(localProperties.storeFile)
+                    storePassword localProperties.storePassword
                 }
             }
 
@@ -112,7 +114,7 @@ def configureModule(Project project, Plugin plugin) {
         }
 
         dependencies {
-            implementation this.project(':murglar.android.core')
+            implementation this.project('core')
 
             compileOnly libs.murglar_core
 

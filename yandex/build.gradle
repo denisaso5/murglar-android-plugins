@@ -1,0 +1,13 @@
+import com.badmanners.build.Plugin
+
+configurePluginModule(project, new Plugin(
+        id: "yandex",
+        name: "Yandex Music",
+        murglarClass: 'com.badmanners.murglar.lib.yandex.service.MurglarYnd',
+        version: 1,
+        libVersion: 1
+))
+
+dependencies {
+    implementation "com.badmanners:murglar.lib.yandex:$versions.murglar"
+}
