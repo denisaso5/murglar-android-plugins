@@ -1,0 +1,10 @@
+repositories {
+    mavenCentral()
+    maven { url = 'https://ajoberstar.org/bintray-backup/' }
+}
+
+dependencies {
+    implementation "com.google.code.gson:gson:2.8.7"
+    implementation "org.kohsuke:github-api:1.131"
+    implementation "org.ajoberstar.grgit:grgit-core:4.1.0"
+}

@@ -17,4 +17,5 @@ class Plugin {
     String fullName = "Murglar plugin for $name"
     String fullVersion = "$libVersion.$version"
     String gitTag = "${id}_v$fullVersion"
+    String apkName = "murglar_plugin_${id}_${fullVersion}.apk"
 }

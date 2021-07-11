@@ -1,4 +1,5 @@
 import com.badmanners.build.Plugin
+import com.badmanners.build.publish.PublishPluginTask
 
 allprojects {
 
@@ -90,9 +91,9 @@ def configurePluginModule(Project project, Plugin plugin) {
                 }
             }
 
-            applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "murglar_plugin_${plugin.id}_${variant.versionName}.apk"
+            applicationVariants.all {
+                it.outputs.all {
+                    outputFileName = plugin.apkName
                 }
             }
 
@@ -120,6 +121,13 @@ def configurePluginModule(Project project, Plugin plugin) {
 
             testImplementation libs.junit
             androidTestImplementation libs.test_runner
+        }
+
+        task publish(type: PublishPluginTask, dependsOn: 'assembleRelease') {
+            it.plugin = plugin
+            githubRepo = localProperties.githubRepo
+            githubToken = localProperties.githubToken
+            indexFile = rootProject.file("index/index.json")
         }
 
         println "Configuration complete: $project"

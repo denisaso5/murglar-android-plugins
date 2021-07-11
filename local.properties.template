@@ -6,3 +6,6 @@ keyAlias=release
 keyPassword=******
 storeFile=keystore.jks
 storePassword=******
+
+githubRepo=badmannersteam/murglar-android-plugins
+githubToken=******
