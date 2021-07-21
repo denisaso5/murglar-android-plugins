@@ -13,10 +13,10 @@
       "id": "soundcloud",
       "appId": "com.badmanners.murglar.plugin.soundcloud",
       "name": "SoundCloud",
-      "apkUrl": "https://github.com/badmannersteam/murglar-android-plugins/releases/download/soundcloud_v1.1/murglar_plugin_soundcloud_1.1.apk",
-      "version": 1,
+      "apkUrl": "https://github.com/badmannersteam/murglar-android-plugins/releases/download/soundcloud_v1.2/murglar_plugin_soundcloud_1.2.apk",
+      "version": 2,
       "libVersion": 1,
-      "timestamp": 1625965649131
+      "timestamp": 1626856700888
     },
     {
       "id": "vkontakte",

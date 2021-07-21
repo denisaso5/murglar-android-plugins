@@ -4,7 +4,7 @@ configurePluginModule(project, new Plugin(
         id: "soundcloud",
         name: "SoundCloud",
         murglarClass: 'com.badmanners.murglar.lib.soundcloud.service.MurglarSC',
-        version: 1,
+        version: 2,
         libVersion: 1
 ))
 
