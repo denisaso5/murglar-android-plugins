@@ -4,7 +4,7 @@ configurePluginModule(project, new Plugin(
         id: "vkontakte",
         name: "VK",
         murglarClass: 'com.badmanners.murglar.lib.vkontakte.service.MurglarVk',
-        version: 1,
+        version: 2,
         libVersion: 1
 ))
 
