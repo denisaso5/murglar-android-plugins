@@ -11,7 +11,7 @@ allprojects {
         ]
 
         versions = [
-                murglar: '0.61',
+                murglar: '0.64',
                 android_build_tools: '4.2.2'
         ]
 
