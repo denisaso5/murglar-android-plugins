@@ -4,10 +4,10 @@
       "id": "deezer",
       "appId": "com.badmanners.murglar.plugin.deezer",
       "name": "Deezer",
-      "apkUrl": "https://github.com/badmannersteam/murglar-android-plugins/releases/download/deezer_v1.1/murglar_plugin_deezer_1.1.apk",
-      "version": 1,
+      "apkUrl": "https://github.com/badmannersteam/murglar-android-plugins/releases/download/deezer_v1.2/murglar_plugin_deezer_1.2.apk",
+      "version": 2,
       "libVersion": 1,
-      "timestamp": 1625965469352
+      "timestamp": 1626856667244
     },
     {
       "id": "soundcloud",
